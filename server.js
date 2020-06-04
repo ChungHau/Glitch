@@ -1,57 +1,64 @@
 const express = require("express");
 const app = express();
+var shortid = require("shortid");
 const bodyParser = require("body-parser");
-const shortid = require("shortid");
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
-
 const adapter = new FileSync("db.json");
 const db = low(adapter);
 
 app.set("view engine", "pug");
 app.set("views", "./views");
-app.use(express.json()); // for parsing application/json
-app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
-  res.render("index");
+  let books = db.get("books").value();
+  res.render("index", { books: books });
 });
 
-app.get("/todos", (req, res) => {
-  let q = req.query.q;
-  if (q) {
-    let matchedTodos = db
-      .get("todos")
-      .value()
-      .filter(
-        todo => todo.content.toLowerCase().indexOf(q.toLowerCase()) !== -1
-      );
-    res.render("todos/index", {
-      todos: matchedTodos
-    });
-  }
-  res.render("todos/index", {
-    todos: db.get("todos").value()
-  });
+//ADD
+app.get("/books/add", (req, res) => {
+  res.render("add");
 });
 
-app.get("/todos/:id/delete", (req, res) => {
-  var id = req.params.id;
-  db.get('todos')
-    .remove({ id: id })
-    .write();
-  res.redirect("/todos");
-});  
-
-app.post("/todos/create", (req, res) => {
+app.post("/books/add", (req, res) => {
   req.body.id = shortid.generate();
-  db.get("todos")
+  db.get("books")
     .push(req.body)
     .write();
-  res.redirect("/todos");
+  res.redirect("/");
 });
-// listen for requests :)
-app.listen(process.env.PORT, () => {
-  console.log("Server listening on port " + process.env.PORT);
+
+//UPDATE
+app.get("/books/:id/update", (req, res) => {
+  let id = req.params.id;
+  let book = db
+    .get("books")
+    .find({ id: id })
+    .value();
+  res.render("update", { book: book });
+});
+
+app.post("/books/:id/update", (req, res) => {
+  let id = req.params.id;
+  db.get("books")
+    .find({ id: id })
+    .assign({ title: req.body.newTitle })
+    .write();
+  res.redirect("/");
+});
+
+//DELETE
+app.get("/books/:id/delete", (req, res) => {
+  let id = req.params.id;
+  db.get("books")
+    .remove({id: id})
+    .write();
+ 
+});
+
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
 });

@@ -1,2 +1,8 @@
-h1 I love codersX
-a(href="/todos") Todo Page
+h1 Books
+ol
+  each book in books
+    li
+      span= book.title 
+      a(href="/books/" + book.id + "/update", style="text-decoration: none")  Update
+      a(href="/books/" + book.id + "/delete", style="text-decoration: none")  Delete
+a(href="/books/add" style="text-decoration: none") Add new book
