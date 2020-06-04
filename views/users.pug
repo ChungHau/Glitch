@@ -1,0 +1,14 @@
+h1 Users
+ol
+  each user in users
+    li
+      span= user.name 
+      a(href="/users/" + user.id + "/view", style="text-decoration: none")  View
+      a(href="/users/" + user.id + "/update", style="text-decoration: none")  Update
+      a(href="/users/" + user.id + "/delete", style="text-decoration: none")  Delete
+
+a(href="/users/create" style="text-decoration: none") Create new user
+br
+br
+a(href="/" style="text-decoration: none") Back
+

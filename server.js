@@ -31,6 +31,16 @@ app.post("/books/add", (req, res) => {
   res.redirect("/");
 });
 
+//VIEW
+app.get("/books/:id/view", (req, res) => {
+  let id = req.params.id;
+  let book = db
+    .get("books")
+    .find({ id: id })
+    .value();
+  res.render("viewbook", { book: book });
+});
+
 //UPDATE
 app.get("/books/:id/update", (req, res) => {
   let id = req.params.id;
@@ -54,11 +64,67 @@ app.post("/books/:id/update", (req, res) => {
 app.get("/books/:id/delete", (req, res) => {
   let id = req.params.id;
   db.get("books")
-    .remove({id: id})
+    .remove({ id: id })
     .write();
- 
 });
 
+//CRUD users
+//Show users
+app.get("/users", (req, res) => {
+  let users = db.get("users").value();
+  res.render("users", { users: users });
+});
+
+//View User
+app.get("/users/:id/view", (req, res) => {
+  let id = req.params.id;
+  let user = db
+    .get("users")
+    .find({ id: id })
+    .value();
+  res.render("user-view", { user: user });
+});
+
+//Create user
+app.get("/users/create", (req, res) => {
+  res.render("user-create");
+});
+
+app.post("/users/create", (req, res) => {
+  req.body.id = shortid.generate();
+  db.get("users")
+    .push(req.body)
+    .write();
+  res.redirect("/users");
+});
+
+//Update user
+app.get("/users/:id/update", (req, res) => {
+  let id = req.params.id;
+  let user = db
+    .get("users")
+    .find({ id: id })
+    .value();
+  res.render("user-update", { user: user });
+});
+
+app.post("/users/:id/update", (req, res) => {
+  let id = req.params.id;
+  db.get("users")
+    .find({ id: id })
+    .assign({ name: req.body.newName }, { age: req.body.newAge })
+    .write();
+  res.redirect("/");
+});
+
+//DELETE
+app.get("/users/:id/delete", (req, res) => {
+  let id = req.params.id;
+  db.get("users")
+    .remove({ id: id })
+    .write();
+  res.redirect("/users");
+});
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });

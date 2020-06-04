@@ -3,6 +3,10 @@ ol
   each book in books
     li
       span= book.title 
+      a(href="/books/" + book.id + "/view", style="text-decoration: none")  View
       a(href="/books/" + book.id + "/update", style="text-decoration: none")  Update
       a(href="/books/" + book.id + "/delete", style="text-decoration: none")  Delete
+
 a(href="/books/add" style="text-decoration: none") Add new book
+br 
+a(href="/users" style="text-decoration: none") Users
