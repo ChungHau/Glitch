@@ -1,65 +1,23 @@
 const express = require("express");
 const router = express.Router()
-var shortid = require("shortid");
+const controller = require('../controllers/user-controller');
 
-const db = require('../db')
-
-router.get("/", (req, res) => {
-  let users = db.get("users").value();
-  res.render("users", { users: users });
-});
+router.get("/", controller.users);
 
 //View User
-router.get("/:id/view", (req, res) => {
-  let id = req.params.id;
-  let user = db
-    .get("users")
-    .find({ id: id })
-    .value();
-  res.render("user-view", { user: user });
-});
+router.get("/:id/view", controller.view);
 
 //Create user
-router.get("/create", (req, res) => {
-  res.render("user-create");
-});
+router.get("/create", controller.create);
 
-router.post("/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get("users")
-    .push(req.body)
-    .write();
-  res.redirect("/users");
-});
+router.post("/create", controller.postCreate);
 
 //Update user
-router.get("/:id/update", (req, res) => {
-  let id = req.params.id;
-  let user = db
-    .get("users")
-    .find({ id: id })
-    .value();
-  res.render("user-update", { user: user });
-  res.redirect("/users");
+router.get("/:id/update", controller.update);
 
-});
-
-router.post("/:id/update", (req, res) => {
-  let id = req.params.id;
-  db.get("users")
-    .find({ id: id })
-    .assign({ name: req.body.newName }, { age: req.body.newAge })
-    .write();
-  res.redirect("/users");
-});
+router.post("/:id/update", controller.postUpdate);
 
 //DELETE
-router.get("/:id/delete", (req, res) => {
-  let id = req.params.id;
-  db.get("users")
-    .remove({ id: id })
-    .write();
-  res.redirect("/users");
-});
+router.get("/:id/delete", controller.delete);
 
 module.exports = router;

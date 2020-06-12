@@ -1,0 +1,14 @@
+h1 Transactions
+
+div
+  ol(style="display: inline-block") User Borrow
+    each user in usersBorrow
+      li(style="list-style: none")= user
+
+  ol(style="display: inline-block") Book Borrow
+    each book in booksBorrow
+      li(style="list-style: none")= book
+
+a(href="/transactions/create" style="text-decoration: none") Borrow
+br
+a(href="/books" style="text-decoration: none") Back

@@ -1,0 +1,17 @@
+h1 New Transaction
+
+form(method="POST")
+  label User
+  select(name="userBorrow" style="margin-left: 15px")
+    each user in users
+      option= user.name
+  br
+  label Book
+  select(name="bookBorrow" style="margin-left: 10px")
+    each book in books
+      option= book.title
+  br
+  button(style="padding: 0 50px; margin-left: 45px") Add
+  
+xxxxxxxxx
+a(href="/transactions" style="text-decoration: none") Done

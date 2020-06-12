@@ -8,12 +8,14 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 const bookRoute = require('./routes/book-route')
 const userRoute = require('./routes/user-route')
+const transactionRoute = require('./routes/transaction-route')
 
 app.set("view engine", "pug");
 app.set("views", "./views");
 
 app.use("/books", bookRoute);
 app.use("/users", userRoute);
+app.use("/transactions", transactionRoute)
 
 
 
