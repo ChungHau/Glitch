@@ -9,6 +9,21 @@ div
     each book in booksBorrow
       li(style="list-style: none")= book
 
+  ol(style="display: inline-block") Complete
+    each transaction in transactions
+      li(style="list-style: none") 
+        a(href="/transactions/" + transaction.id + "/complete", style="text-decoration: none") Complete
+        
+  ol(style="display: inline-block") Status
+    each status in statuses
+      li(style="list-style: none")
+        if(status === false)
+          span Incomplete
+        else
+          span Complete
+
 a(href="/transactions/create" style="text-decoration: none") Borrow
 br
 a(href="/books" style="text-decoration: none") Back
+br
+
