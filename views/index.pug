@@ -1,10 +1,8 @@
 extends ../layouts/common.pug
 block content
-  nav(class="navbar navbar-light bg-light")
-    h1(class="mr-auto") Books
-    a(class="btn btn-primary" href="/books/add" ) Add new book
-    a(class="btn btn-secondary" href="/users") Users
-    a(class="btn btn-dark" href="/transactions")  Transactions
+  
+  h1(class="mr-auto") Books
+
   ol(class="list-group")
     each book in books
       li(class="list-group-item list-group-item-dark")
@@ -12,5 +10,7 @@ block content
         a(href="/books/" + book.id + "/view")  View
         a(href="/books/" + book.id + "/update")  Update
         a(href="/books/" + book.id + "/delete")  Delete
-
+  a(class="btn btn-primary" href="/books/add" ) Add new book
+  a(class="btn btn-secondary" href="/users") Users
+  a(class="btn btn-dark" href="/transactions")  Transactions
   
