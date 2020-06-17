@@ -1,8 +1,13 @@
-h1 Add book
-form(action="/books/add", method="POST")
-  label Title
-    input(type="text", name="title" style="margin-left: 60px")
-  br
-  label Description
-    input(type="text", name="description" style="margin-left: 15px")
-  button Add
+extends ../layouts/common.pug
+block content
+  h1 Add book
+  form(action="/books/add", method="POST")
+    div(class="form-group")
+      label Title
+        input(class="form-control" type="text" name="title") 
+    div(class="form-group")
+      label Description
+        input(class="form-control" type="text" name="description")
+    button(class="btn btn-primary") Add
+    
+  a(href="/books") Go back

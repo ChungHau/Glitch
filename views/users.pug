@@ -1,14 +1,15 @@
-h1 Users
-ol
-  each user in users
-    li
-      span= user.name 
-      a(href="/users/" + user.id + "/view", style="text-decoration: none")  View
-      a(href="/users/" + user.id + "/update", style="text-decoration: none")  Update
-      a(href="/users/" + user.id + "/delete", style="text-decoration: none")  Delete
+extends ../layouts/common.pug
+block content
+  h1 Users
+  ol(class="list-group")
+    each user in users
+      li(class="list-group-item list-group-item-dark")
+        span= user.name 
+        a(href="/users/" + user.id + "/view", style="text-decoration: none")  View
+        a(href="/users/" + user.id + "/update", style="text-decoration: none")  Update
+        a(href="/users/" + user.id + "/delete", style="text-decoration: none")  Delete
 
-a(href="/users/create" style="text-decoration: none") Create new user
-br
-br
-a(href="/books" style="text-decoration: none") Back
+  a(class="btn btn-secondary" href="/users/create" style="text-decoration: none") Create new user
+  br
+  a(href="/books" style="text-decoration: none") Back
 

@@ -1,6 +1,8 @@
-ul
-  li Name: 
-    span= user.name
-  li Age: 
-    span= user.age
-a(href="/users" style="text-decoration: none") Back
+extends ../layouts/common.pug
+block content
+  ul(class="list-group")
+    li(class="list-group-item list-group-item-dark") Name: 
+      span= user.name
+    li(class="list-group-item list-group-item-dark") Age: 
+      span= user.age
+  a(href="/users" style="text-decoration: none") Back

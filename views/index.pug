@@ -1,14 +1,16 @@
-h1 Books
-ol
-  each book in books
-    li
-      span= book.title 
-      a(href="/books/" + book.id + "/view", style="text-decoration: none")  View
-      a(href="/books/" + book.id + "/update", style="text-decoration: none")  Update
-      a(href="/books/" + book.id + "/delete", style="text-decoration: none")  Delete
+extends ../layouts/common.pug
+block content
+  nav(class="navbar navbar-light bg-light")
+    h1(class="mr-auto") Books
+    a(class="btn btn-primary" href="/books/add" ) Add new book
+    a(class="btn btn-secondary" href="/users") Users
+    a(class="btn btn-dark" href="/transactions")  Transactions
+  ol(class="list-group")
+    each book in books
+      li(class="list-group-item list-group-item-dark")
+        span= book.title 
+        a(href="/books/" + book.id + "/view")  View
+        a(href="/books/" + book.id + "/update")  Update
+        a(href="/books/" + book.id + "/delete")  Delete
 
-a(href="/books/add" style="text-decoration: none") Add new book
-br 
-a(href="/users" style="text-decoration: none") Users
-br
-a(href="/transactions" style="text-decoration: none") Transactions
+  

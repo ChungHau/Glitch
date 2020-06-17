@@ -1,17 +1,18 @@
-h1 New Transaction
+extends ../layouts/common.pug
+block content
+  h1 New Transaction
 
-form(method="POST")
-  label User
-  select(name="userBorrow" style="margin-left: 15px")
-    each user in users
-      option= user.name
-  br
-  label Book
-  select(name="bookBorrow" style="margin-left: 10px")
-    each book in books
-      option= book.title
-  br
-  button(style="padding: 0 50px; margin-left: 45px") Add
+  form(method="POST")
+    select(class="custom-select custom-select-lg mb-3" name="userBorrow")
+      each user in users
+        option(selected) User
+        option= user.name
   
-xxxxxxxxx
-a(href="/transactions" style="text-decoration: none") Done
+    select(class="custom-select custom-select-lg mb-3" name="bookBorrow")
+      each book in books
+        option(selected) Book
+        option= book.title
+    button(class="btn btn-primary") Add
+
+  
+  a(href="/transactions" style="text-decoration: none") Done

@@ -1,4 +1,7 @@
-form(action="/books/" + book.id + "/update", method="POST")
-  label New Title
-    input(type="text", name="newTitle") 
-    button  Update
+extends ../layouts/common.pug
+block content
+  form(class="form-group" action="/books/" + book.id + "/update", method="POST")
+    label New Title
+      input(class="form-control" type="text" name="newTitle") 
+      button(class="btn btn-primary") Update
+  a(href="/books") Go back

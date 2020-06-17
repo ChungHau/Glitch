@@ -1,3 +1,7 @@
-p Title: #{book.title}
-p Description: #{book.description}
-a(href="/books" style="text-decoration: none") Back
+extends ../layouts/common.pug
+block content
+  div(class="card" style="width: 33em") 
+    div(class="card-body")
+      h3(class="card-title") #{book.title}
+      h6(class="card-text") Description: #{book.description}
+  a(class="card-text " href="/books" style="text-decoration: none") Back

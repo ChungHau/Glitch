@@ -1,8 +1,13 @@
-h1 New user
-form(action="/users/create", method="POST")
-  label Name
-    input(type="text", name="name" style="margin-left: 15px")
-  br
-  label Age
-    input(type="number", name="age" style="margin-left: 25px")
-  button Add
+extends ../layouts/common.pug
+block content
+  h1 New user
+  form(action="/users/create", method="POST")
+    div(class="form-group")
+      label Name
+        input(class="form-control" type="text", name="name")
+    div(class="form-group")
+      label Age
+        input(class="form-control" type="number", name="age")
+    button(class="btn btn-primary") Add
+  
+  a(href="/users") Go back

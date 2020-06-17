@@ -1,7 +1,10 @@
-form(action="/users/" + user.id + "/update", method="POST")
-  label New Name
-    input(type="text", name="newName" style="margin-left: 15px") 
-  br
-  label New Age
-    input(type="number", name="newAge" style="margin-left: 25px") 
-    button  Update
+extends ../layouts/common.pug
+block content
+  form(action="/users/" + user.id + "/update", method="POST")
+    div(class="form-group")
+      label New Name
+        input(class="form-control" type="text", name="newName") 
+    div(class="form-group")
+      label New Age
+        input(class="form-control" type="number", name="newAge") 
+    button(class="btn btn-primary") Update
