@@ -103,7 +103,13 @@
       "userId": "-Amrer0Qo",
       "bookId": "lsCdHjd3Y",
       "id": "xqgG4FQIW",
-      "isComplete": false
+      "isComplete": true
+    },
+    {
+      "userId": "-Amrer0Qo",
+      "bookId": "OhUQ_cQhG",
+      "id": "FF-DSz0To",
+      "isComplete": true
     }
   ]
 }

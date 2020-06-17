@@ -54,10 +54,19 @@ module.exports.postCreate = (req, res) => {
 };
 
 module.exports.complete = (req, res) => {
-  let id = req.params.id;
-  db.get("transactions")
-    .find({ id: id })
+  let errors = [];
+  let paramsId = req.params.id;
+  let id = db.get("transactions").find({id: paramsId}).value();
+  
+  if(id === undefined) {
+    errors.push(paramsId);
+    res.render('transactions', {errors: errors});
+    return;
+  } else {
+     db.get("transactions")
+    .find({ id: paramsId })
     .assign({ isComplete: true })
     .write();
   res.redirect("/transactions");
+  }
 };

@@ -1,31 +1,35 @@
 extends ../layouts/common.pug
 block content
+  if(errors)
+    each error in errors
+      .alert.alert-danger= 'Cannot find id ' + error
+      a(href="/transactions", class="btn btn-danger") Go back
+  else
+    h1 Transactions
+    div
+      ol(style="display: inline-block") User Borrow
+        each user in usersBorrow
+          li(style="list-style: none")= user
 
-  h1 Transactions
-  div
-    ol(style="display: inline-block") User Borrow
-      each user in usersBorrow
-        li(style="list-style: none")= user
+      ol(style="display: inline-block") Book Borrow
+        each book in booksBorrow
+          li(style="list-style: none")= book
 
-    ol(style="display: inline-block") Book Borrow
-      each book in booksBorrow
-        li(style="list-style: none")= book
+      ol(style="display: inline-block") Complete
+        each transaction in transactions
+          li(style="list-style: none") 
+            a(href="/transactions/" + transaction.id + "/complete", style="text-decoration: none") Complete
 
-    ol(style="display: inline-block") Complete
-      each transaction in transactions
-        li(style="list-style: none") 
-          a(href="/transactions/" + transaction.id + "/complete", style="text-decoration: none") Complete
+      ol(style="display: inline-block") Status
+        each status in statuses
+          li(style="list-style: none")
+            if(status === false)
+              span Incomplete
+            else
+              span Complete
 
-    ol(style="display: inline-block") Status
-      each status in statuses
-        li(style="list-style: none")
-          if(status === false)
-            span Incomplete
-          else
-            span Complete
-
-  a(class="btn btn-primary" href="/transactions/create" style="text-decoration: none") Borrow
-  br
-  a(href="/books" style="text-decoration: none") Back
+    a(class="btn btn-primary" href="/transactions/create" style="text-decoration: none") Borrow
+    br
+    a(href="/books" style="text-decoration: none") Back
   
 

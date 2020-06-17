@@ -4,15 +4,15 @@ block content
 
   form(method="POST")
     select(class="custom-select custom-select-lg mb-3" name="userBorrow")
-      each user in users
-        option(selected) User
+     option(selected) User
+     each user in users
         option= user.name
   
     select(class="custom-select custom-select-lg mb-3" name="bookBorrow")
+      option(selected) Book
       each book in books
-        option(selected) Book
         option= book.title
     button(class="btn btn-primary") Add
 
   
-  a(href="/transactions" style="text-decoration: none") Done
+  a(href="/transactions" style="text-decoration: none") Go Back
